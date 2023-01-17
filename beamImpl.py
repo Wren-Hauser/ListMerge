@@ -139,7 +139,8 @@ with beam.Pipeline() as p:
     fileHeader = 'legal_entity, counterparty, tier, max(rating by counterparty), sum(value where status=ARAP), sum(value where status=ACCR)'
 
     finalDS = ((legalDS, counterDS, tierDS, legalCounterDS)
-               | beam.Flatten()
+               | beam.Flatten():
+
                | beam.Map(lambda x: tuple(x))
                | beam.Map(lambda x: ''.join(','.join(str(y) for y in x)))
                | beam.io.WriteToText('output/beamOut.csv', shard_name_template='', header=fileHeader))
