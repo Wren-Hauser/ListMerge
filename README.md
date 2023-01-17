@@ -1,7 +1,6 @@
 # ListMerge
 
-Puts transformed data in `output/out.csv`
-Run `pandasImpl.py`
+Puts transformed data in `output/pandasOut.csv` and `output/beamOut.csv`
+Run `pandasImpl.py` and `beamImpl.py`
 
-- Completed with pandas
-- Was unable to complete with beam, as I've never spent any time with the technology before.
+- Completed with pandas and apache beam python
