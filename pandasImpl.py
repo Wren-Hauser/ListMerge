@@ -20,23 +20,23 @@ df3['sum(value where status=ACCR)'] = np.where(df3['status'] == "ACCR", df3['val
 ldf = df3.groupby('legal_entity').agg({'legal_entity': 'first',
                                        'counter_party': 'nunique',
                                        'tier': 'nunique',
+                                       'max(rating by counterparty)': 'max',
                                        'sum(value where status=ARAP)': 'sum',
-                                       'sum(value where status=ACCR)': 'sum',
-                                       'max(rating by counterparty)': 'max'})
+                                       'sum(value where status=ACCR)': 'sum'})
 
 cdf = df3.groupby(['counter_party']).agg({'legal_entity': 'nunique',
                                           'counter_party': 'first',
                                           'tier': 'nunique',
+                                          'max(rating by counterparty)': 'max',
                                           'sum(value where status=ARAP)': 'sum',
-                                          'sum(value where status=ACCR)': 'sum',
-                                          'max(rating by counterparty)': 'max'})
+                                          'sum(value where status=ACCR)': 'sum'})
 
 tdf = df3.groupby(['tier']).agg({'legal_entity': 'nunique',
                                  'counter_party': 'nunique',
                                  'tier': 'first',
+                                 'max(rating by counterparty)': 'max',
                                  'sum(value where status=ARAP)': 'sum',
-                                 'sum(value where status=ACCR)': 'sum',
-                                 'max(rating by counterparty)': 'max'})
+                                 'sum(value where status=ACCR)': 'sum'})
 
 lcdf = df3.groupby(['legal_entity', 'counter_party']).agg({'legal_entity': 'first',
                                                            'counter_party': 'first',
@@ -47,4 +47,4 @@ lcdf = df3.groupby(['legal_entity', 'counter_party']).agg({'legal_entity': 'firs
 
 fdf = pandas.concat([ldf, cdf, tdf, lcdf])
 fdf = fdf.reset_index(drop=True)
-fdf.to_csv('output/out.csv', index=False)
+fdf.to_csv('output/pandasOut.csv', index=False)
